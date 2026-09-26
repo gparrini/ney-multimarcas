@@ -33,6 +33,8 @@
     position:relative;
     overflow-x:hidden;
     min-height:100dvh;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
   }
 
   /* ---- Background image + overlay ---- */
@@ -40,7 +42,7 @@
     position:fixed;
     inset:0;
     z-index:-2;
-    background-image:url("background.png");
+    background-image:url("background.jpg");
     background-size:cover;
     background-position:center 35%;
     transform:scale(1.06);
@@ -95,14 +97,14 @@
     top:46px;
     width:min(70%,320px);
     height:130px;
-    background:radial-gradient(ellipse at center, rgba(240,96,0,0.38), transparent 70%);
-    filter:blur(26px);
+    background:radial-gradient(ellipse at center, rgba(240,96,0,0.20), transparent 70%);
+    filter:blur(34px);
     z-index:-1;
-    animation:glowPulse 4.5s ease-in-out infinite;
+    animation:glowPulse 5.5s ease-in-out infinite;
   }
   @keyframes glowPulse{
-    0%,100%{opacity:.55;transform:scale(1);}
-    50%{opacity:.9;transform:scale(1.08);}
+    0%,100%{opacity:.5;transform:scale(1);}
+    50%{opacity:.8;transform:scale(1.04);}
   }
 
   /* ---- Cards ---- */
@@ -122,22 +124,22 @@
     align-items:center;
     gap:16px;
     padding:16px 18px;
-    border-radius:18px;
+    border-radius:20px;
     text-decoration:none;
     color:var(--silver);
     background:
-      linear-gradient(135deg, rgba(20,14,12,0.82), rgba(10,8,8,0.72));
-    border:1px solid rgba(255,255,255,0.06);
-    box-shadow:0 8px 24px -10px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05);
+      linear-gradient(135deg, rgba(28,20,18,0.42), rgba(10,8,8,0.30));
+    border:1px solid rgba(255,255,255,0.10);
+    box-shadow:0 10px 28px -14px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.08);
     overflow:hidden;
     isolation:isolate;
-    backdrop-filter:blur(9px) saturate(1.1);
-    -webkit-backdrop-filter:blur(9px) saturate(1.1);
+    backdrop-filter:blur(18px) saturate(1.4);
+    -webkit-backdrop-filter:blur(18px) saturate(1.4);
     /* stagger entrance */
     opacity:0;
-    transform:translateY(38px) scale(0.96);
-    animation:cardIn .7s cubic-bezier(.2,.8,.25,1) forwards;
-    transition:transform .28s cubic-bezier(.2,.8,.25,1), box-shadow .28s ease, border-color .28s ease;
+    transform:translateY(22px);
+    animation:cardIn .6s cubic-bezier(.16,.84,.32,1) forwards;
+    transition:transform .35s cubic-bezier(.16,.84,.32,1), box-shadow .35s ease, border-color .35s ease, background .35s ease;
   }
 
   /* fire accent bar on the left */
@@ -145,9 +147,9 @@
     content:"";
     position:absolute;
     left:0;top:0;bottom:0;
-    width:5px;
+    width:4px;
     background:linear-gradient(180deg, var(--c1), var(--c2));
-    box-shadow:0 0 14px var(--c1);
+    box-shadow:0 0 10px -2px var(--c1);
     z-index:2;
   }
   /* glow sheen that sweeps on hover */
@@ -155,7 +157,7 @@
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.10) 48%, transparent 66%);
+    background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.08) 48%, transparent 66%);
     transform:translateX(-120%);
     transition:transform .7s ease;
     z-index:1;
@@ -163,53 +165,58 @@
   }
 
   .card:hover, .card:active{
-    transform:translateY(-3px) scale(1.015);
+    transform:translateY(-4px) scale(1.015);
     border-color:var(--card-border);
-    box-shadow:0 14px 34px -12px rgba(0,0,0,0.85), 0 0 0 1px rgba(240,112,0,0.35), 0 10px 30px -12px var(--c1);
+    background:linear-gradient(135deg, rgba(32,23,20,0.52), rgba(10,8,8,0.38));
+    box-shadow:0 18px 40px -16px rgba(0,0,0,0.7), 0 0 0 1px rgba(240,112,0,0.25), 0 8px 24px -14px var(--c1);
   }
   .card:hover::after, .card:active::after{ transform:translateX(120%); }
+  .card:hover .ic{ transform:scale(1.06); }
 
-  .card:active{ transform:translateY(0) scale(0.985); transition-duration:.09s; }
+  .card:active{ transform:translateY(-1px) scale(0.99); transition-duration:.1s; }
 
   @keyframes cardIn{
-    to{opacity:1;transform:translateY(0) scale(1);}
+    to{opacity:1;transform:translateY(0);}
   }
-  .card:nth-child(1){animation-delay:.55s;}
-  .card:nth-child(2){animation-delay:.68s;}
-  .card:nth-child(3){animation-delay:.81s;}
-  .card:nth-child(4){animation-delay:.94s;}
+  .card:nth-child(1){animation-delay:.5s;}
+  .card:nth-child(2){animation-delay:.6s;}
+  .card:nth-child(3){animation-delay:.7s;}
+  .card:nth-child(4){animation-delay:.8s;}
 
   /* Icon capsule */
   .ic{
     flex:0 0 auto;
     width:52px;height:52px;
-    border-radius:14px;
+    border-radius:16px;
     display:grid;place-items:center;
     background:linear-gradient(140deg, var(--c1), var(--c2));
-    box-shadow:0 6px 16px -4px var(--c1), inset 0 1px 0 rgba(255,255,255,0.35);
+    box-shadow:0 6px 16px -6px var(--c1), inset 0 1px 0 rgba(255,255,255,0.35);
     position:relative;
     z-index:2;
+    transition:transform .35s cubic-bezier(.16,.84,.32,1);
   }
   .ic svg{width:28px;height:28px;display:block;}
-  .ic.ig{ background:linear-gradient(135deg,#f9ce34 0%,#ee2a7b 45%,#6228d7 100%); box-shadow:0 6px 16px -4px rgba(238,42,123,.6), inset 0 1px 0 rgba(255,255,255,0.35);}
-  .ic.wa{ background:linear-gradient(140deg,#37e07d,#12b866); box-shadow:0 6px 16px -4px rgba(18,184,102,.55), inset 0 1px 0 rgba(255,255,255,0.35);}
+  .ic.ig{ background:linear-gradient(135deg,#f9ce34 0%,#ee2a7b 45%,#6228d7 100%); box-shadow:0 6px 16px -6px rgba(238,42,123,.5), inset 0 1px 0 rgba(255,255,255,0.35);}
+  .ic.wa{ background:linear-gradient(140deg,#37e07d,#12b866); box-shadow:0 6px 16px -6px rgba(18,184,102,.45), inset 0 1px 0 rgba(255,255,255,0.35);}
 
-  .txt{ z-index:2; display:flex; flex-direction:column; gap:2px; }
+  .txt{ z-index:2; display:flex; flex-direction:column; gap:3px; }
   .txt .t{
     font-family:'Barlow Condensed',sans-serif;
     font-weight:700;
     font-size:22px;
-    letter-spacing:.5px;
+    letter-spacing:.6px;
     line-height:1;
     color:#fff;
     text-transform:uppercase;
+    text-shadow:0 1px 4px rgba(0,0,0,0.45);
   }
   .txt .s{
-    font-size:12.5px;
+    font-size:12px;
     font-weight:600;
-    letter-spacing:.3px;
+    letter-spacing:.4px;
     color:var(--c-sub, var(--fire-amber));
     text-transform:uppercase;
+    opacity:.85;
   }
 
   .arrow{
@@ -308,7 +315,7 @@
       border-radius:32px;
       overflow:hidden;
       isolation:isolate;
-      background-image:url("background.png");
+      background-image:url("background.jpg");
       background-size:cover;
       background-position:center 34%;
       box-shadow:
@@ -381,7 +388,7 @@
         <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
       </a>
 
-      <a class="card loc" href="https://maps.app.goo.gl/S62tK7ps8YBGMLqo7?g_st=iw" target="_blank" rel="noopener">
+      <a class="card loc" href="https://www.google.com/maps/place/NeyMultimarcas/@-15.7073011,-47.9128876,17z/data=!4m6!3m5!1s0x935a39d6d710c447:0xed207cfde396fd57!8m2!3d-15.7073009!4d-47.9128866!16s%2Fg%2F11sdf_cd4_?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
         <span class="ic" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
         </span>
@@ -411,19 +418,19 @@
       var host = document.getElementById('embers');
       if(!host) return;
       if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var N = window.innerWidth < 500 ? 14 : 22;
+      var N = window.innerWidth < 500 ? 6 : 10;
       for(var i=0;i<N;i++){
         var e = document.createElement('span');
         e.className='ember';
-        var size = 3 + Math.random()*5;
+        var size = 2 + Math.random()*3.5;
         e.style.left = (Math.random()*100)+'%';
         e.style.width = size+'px';
         e.style.height = size+'px';
         e.style.setProperty('--drift', (Math.random()*60-30)+'px');
-        var dur = 7 + Math.random()*8;
+        var dur = 9 + Math.random()*8;
         e.style.animationDuration = dur+'s';
         e.style.animationDelay = (-Math.random()*dur)+'s';
-        e.style.opacity = 0.3 + Math.random()*0.5;
+        e.style.opacity = 0.18 + Math.random()*0.3;
         host.appendChild(e);
       }
     })();
